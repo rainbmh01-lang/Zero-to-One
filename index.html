@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل مكاتب التوصيل - ZR Express</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #0284c7;
+      --success: #16a34a;
+      --success-light: #f0fdf4;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge-header {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .search-wrapper {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      background: var(--card-bg);
+      padding: 12px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 44px 14px 40px;
+      font-size: 1.05rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fff;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+    }
+
+    .clear-btn {
+      position: absolute;
+      left: 12px;
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      padding: 4px;
+    }
+
+    .clear-btn:hover {
+      color: var(--text-main);
+    }
+
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 4px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .status-count strong {
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #cbd5e1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 12px;
+    }
+
+    .wilaya-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wilaya-code {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 8px;
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .wilaya-name h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .wilaya-name span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .branch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .card-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .address-box {
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.45;
+      border: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .address-fr {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .stopdesk-box {
+      background: var(--success-light);
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .stopdesk-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .phone-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .phone-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      color: #15803d;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #86efac;
+      text-decoration: none;
+      direction: ltr;
+      transition: all 0.15s;
+    }
+
+    .phone-btn:hover {
+      background: #15803d;
+      color: #ffffff;
+    }
+
+    .contacts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .contact-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+    }
+
+    .contact-item span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-bottom: 2px;
+    }
+
+    .contact-item a {
+      color: var(--text-main);
+      font-weight: 700;
+      text-decoration: none;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    .contact-item a:hover {
+      color: var(--primary);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px dashed var(--border);
+      grid-column: 1 / -1;
+    }
+
+    .empty-state h3 {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge-header">البريد السريع ZR Express</span>
+      <h1>دليل مكاتب التوصيل والاستقبال</h1>
+      <p>ابحث باسم الولاية، رقمها، أو اسم الفرع للعثور الفوري على العناوين وأرقام الهواتف</p>
+    </header>
+
+    <div class="search-wrapper">
+      <div class="input-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="اكتب اسم الولاية أو رقمها... (مثال: الجزائر، 16، وهران، الشلف)" 
+          autofocus
+          autocomplete="off"
+        >
+        <button id="clearBtn" class="clear-btn" title="مسح">✕</button>
+      </div>
+      <div class="status-bar">
+        <span id="resultsCount">جاري تحميل البيانات...</span>
+        <span>تحديث رسمي: 01/05/2026</span>
+      </div>
+    </div>
+
+    <main id="officesGrid" class="grid"></main>
+
+    <footer>
+      <p>دليل مكاتب ZR Express • البيانات مستخرجة من الوثيقة الرسمية للشركة</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // البيانات الكاملة للمكاتب
+    let offices = [];
+
+    // تحميل البيانات
+    function loadData() {
+      if (typeof OFFICES_DATA !== 'undefined' && Array.isArray(OFFICES_DATA) && OFFICES_DATA.length > 0) {
+        offices = OFFICES_DATA;
+        render(offices);
+        return;
+      }
+
+      fetch('offices.json')
+        .then(res => res.json())
+        .then(data => {
+          offices = data;
+          render(offices);
+        })
+        .catch(err => {
+          console.error('خطأ في تحميل البيانات:', err);
+        });
+    }
+
+    function render(list) {
+      const grid = document.getElementById('officesGrid');
+      const countEl = document.getElementById('resultsCount');
+
+      countEl.innerHTML = `تم العثور على <strong>${list.length}</strong> مكتب`;
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>لا توجد مكاتب مطابقة</h3>
+            <p>تأكد من كتابة اسم الولاية أو رقمها بشكل صحيح.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(item => `
+        <article class="card">
+          <div class="card-header">
+            <div class="wilaya-info">
+              <span class="wilaya-code">${item.code}</span>
+              <div class="wilaya-name">
+                <h2>${item.wilaya_ar}</h2>
+                <span>${item.wilaya_fr}</span>
+              </div>
+            </div>
+            ${item.branch_ar ? `<span class="branch-badge">${item.branch_ar}</span>` : ''}
+          </div>
+
+          <div class="card-section">
+            <span class="section-title">📍 عنوان المكتب</span>
+            <div class="address-box">
+              <div>${item.address_ar}</div>
+              ${item.address_fr ? `<div class="address-fr">${item.address_fr}</div>` : ''}
+            </div>
+          </div>
+
+          <div class="stopdesk-box">
+            <div class="stopdesk-title">
+              <span>📦 مكتب استقبال الطرود (Stop Desk)</span>
+            </div>
+            <div class="phone-list">
+              ${item.stop_desk.map(p => `
+                <a href="tel:${p.replace(/[^0-9]/g, '')}" class="phone-btn">
+                  <span>📞</span> ${p}
+                </a>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="contacts-row">
+            <div class="contact-item">
+              <span>الرقم التجاري</span>
+              <a href="tel:${item.commercial.replace(/[^0-9]/g, '')}">${item.commercial || '-'}</a>
+            </div>
+            <div class="contact-item">
+              <span>رقم الشكاوى</span>
+              <a href="tel:${item.reclamation.replace(/[^0-9]/g, '')}">${item.reclamation || '-'}</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // تصفية نتائج البحث
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearBtn');
+      clearBtn.style.display = query ? 'block' : 'none';
+
+      if (!query) {
+        render(offices);
+        return;
+      }
+
+      // تنظيف أحرف الهمزات للبحث المرن بالعربية
+      const normalizeAr = (text) => {
+        return text
+          .replace(/[أإآ]/g, 'ا')
+          .replace(/ة/g, 'ه')
+          .replace(/ى/g, 'ي')
+          .toLowerCase();
+      };
+
+      const normQuery = normalizeAr(query);
+
+      const filtered = offices.filter(item => {
+        const codeMatch = item.code.includes(query);
+        const wilayaArMatch = normalizeAr(item.wilaya_ar).includes(normQuery);
+        const wilayaFrMatch = item.wilaya_fr.toLowerCase().includes(query);
+        const branchArMatch = item.branch_ar ? normalizeAr(item.branch_ar).includes(normQuery) : false;
+        const branchFrMatch = item.branch_fr ? item.branch_fr.toLowerCase().includes(query) : false;
+        const addressArMatch = normalizeAr(item.address_ar).includes(normQuery);
+        const addressFrMatch = item.address_fr ? item.address_fr.toLowerCase().includes(query) : false;
+
+        return codeMatch || wilayaArMatch || wilayaFrMatch || branchArMatch || branchFrMatch || addressArMatch || addressFrMatch;
+      });
+
+      render(filtered);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', handleSearch);
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      input.focus();
+      handleSearch();
+    });
+
+    // تحميل البيانات المدمجة مباشرة لضمان العمل التام بدون إنترنت وبدون CORS
+    function loadEmbeddedData() {
+      // سيتم استخدام offices.json المحمل أو إسناد البيانات مباشرة
+      fetch('offices.json')
+        .then(res => res.json())
+        .then(data => {
+          offices = data;
+          render(offices);
+        })
+        .catch(() => {
+          // جاري القراءة عبر المتغير
+          if (typeof EMBEDDED_DATA !== 'undefined') {
+            offices = EMBEDDED_DATA;
+            render(offices);
+          }
+        });
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
